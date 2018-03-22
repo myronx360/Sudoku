@@ -1,5 +1,6 @@
 package com.killerapps.sudoku;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView currTile;
     private TextView prevTile;
     private String TAG = "HELPME";
+    private final int DEFAULT_COLOR = Color.BLUE;
 
     TextView a1;
     TextView a2;
@@ -209,23 +211,6 @@ public class MainActivity extends AppCompatActivity {
         i8 = (TextView) findViewById(R.id.txtI8);
         i9 = (TextView) findViewById(R.id.txtI9);
 
-
-
-//        currTile = null;
-
-//
-//        for (int i = 1; i < 10; i++){
-//            String txtView = "R.id.txtA";
-//            txtView = txtView.concat(Integer.toString(i));
-//            Log.d(TAG, "onCreate: " + txtView);
-//            findViewById(txtView).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    currTile = (TextView) findViewById(Integer.parseInt(txtView));
-//                }
-//            });
-//
-//        }
 
         ///////////////// Row set 1 \\\\\\\\\\\\\\\\\\\\\\\\\
         ///////////////// Tile set A \\\\\\\\\\\\\\\\\\\\\\\\\
@@ -651,6 +636,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currTile = (TextView) findViewById(R.id.txtF8);
+                highlightTile(currTile);
             }
         });
 
@@ -885,7 +871,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                currTile.setText("0");
                 if(checkWin()){
                     Toast.makeText(MainActivity.this, "Winner", Toast.LENGTH_SHORT).show();
                 }else{
@@ -897,70 +882,90 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("1");
+                if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                    currTile.setText("1");
+                }
             }
         });
 
         findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("2");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("2");
+               }
             }
         });
 
         findViewById(R.id.btn3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("3");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("3");
+               }
             }
         });
 
         findViewById(R.id.btn4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("4");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("4");
+               }
             }
         });
 
         findViewById(R.id.btn5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("5");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("5");
+               }
             }
         });
 
         findViewById(R.id.btn6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("6");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("6");
+               }
             }
         });
 
         findViewById(R.id.btn7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("7");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("7");
+               }
             }
         });
 
         findViewById(R.id.btn8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("8");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("8");
+               }
             }
         });
 
         findViewById(R.id.btn9).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("9");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("9");
+               }
             }
         });
 
         findViewById(R.id.btnClear).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currTile.setText("");
+               if(currTile.getCurrentTextColor() != DEFAULT_COLOR) {
+                   currTile.setText("");
+               }
             }
         });
 
@@ -968,7 +973,12 @@ public class MainActivity extends AppCompatActivity {
         fillBoard();
 
     }
-
+    private void createNewPuzzle() {
+        Intent mIntent = getIntent();
+        finish();
+        startActivity(mIntent);
+    }
+    
     private void highlightTile(TextView t){
 
             if(prevTile != null){
@@ -988,7 +998,6 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<TextView> tileList = new ArrayList<>();
         ArrayList<Integer> tilePosList = new ArrayList<>();
-        HashMap<TextView, Integer> defaultTiles = new HashMap<>();
 
 
 
@@ -1031,571 +1040,1003 @@ public class MainActivity extends AppCompatActivity {
             int pos = tilePosList.get(i);
             TextView tile = tileList.get(tilePosList.get(i));
             tile.setText(Integer.toString(num));
-            Log.i(TAG, "i: " + i + "tilePos, "+ tilePosList.get(i)+"   "+ num);
+
             // @return false if number already in path, return true if tile is empty or not repeated
             // check win paths
             //  if num already there, get new num
-//            if(tilePosList.get(i) == 0){
-//                while (!fillBlockA() && !fillRow1() && !fillCol1()){
-//                    num = r.nextInt(9) + 1;
-//                }
-//                tile.setText(Integer.toString(num));
-//                tile.setTextColor(Color.BLUE);
-//            }
-//            for (int j = 0; j < defaultSpaces; j++){
-//                Log.i(TAG, "Tilelist: "+j+": " + tileList.get(j).getText().toString() +"");
-//            }
 
-
-            Log.i(TAG, "Fill 1: " + !fillBlockA() +" : "+ !fillRow1() +" : "+ !fillCol1());
-            Log.i(TAG, "Fill 2: " + !fillBlockA() +" : "+ !fillRow2() +" : "+ !fillCol2());
-            Log.i(TAG, "Fill: 3 " + !fillBlockA() +" : "+ !fillRow3() +" : "+ !fillCol3());
-            int exitLoopCounter = 0; // TODO: Use find and replace
-            switch (tilePosList.get(i)){
-                default:
-                    Log.i(TAG, "default: NUM" + num + "; tilePos, "+ tilePosList.get(i));
+            int exitLoopCounter = 0;
+            switch (tilePosList.get(i)) {
                 case 0:
-                    while ( !fillBlockA() || !fillRow1() || !fillCol1()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockA() || !fillRow1() || !fillCol1()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 1:
-                    while ( !fillBlockA() || !fillRow1() ||!fillCol2()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockA() || !fillRow1() || !fillCol2()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 2:
-                    while ( !fillBlockA() || !fillRow1()  || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockA() || !fillRow1() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 3:
-                    while ( !fillBlockA() ||  !fillRow2() || !fillCol1()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockA() || !fillRow2() || !fillCol1()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 4:
-                    while ( !fillBlockA() || !fillRow2() || !fillCol2() ){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockA() || !fillRow2() || !fillCol2()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 5:
-                    while (!fillBlockA() || !fillRow2()  || !fillCol3()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockA() || !fillRow2() || !fillCol3()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 6:
-                    while ( !fillBlockA() || !fillRow3() || !fillCol1()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockA() || !fillRow3() || !fillCol1()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 7:
-                    while (!fillBlockA() || !fillRow3() || !fillCol2()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockA() || !fillRow3() || !fillCol2()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 8:
-                    while (!fillBlockA() || !fillRow3() || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockA() || !fillRow3() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 9:
-                    while (!fillBlockB() ||  !fillRow1() || !fillCol4()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockB() || !fillRow1() || !fillCol4()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 10:
-                    while (!fillBlockB() ||  !fillRow1() || !fillCol5()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockB() || !fillRow1() || !fillCol5()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 11:
-                    while (!fillBlockB() || !fillRow1()  || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockB() || !fillRow1() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 12:
-                    while ( !fillBlockB() || !fillRow2() || !fillCol4()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockB() || !fillRow2() || !fillCol4()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 13:
-                    while ( !fillBlockB() || !fillRow2()  || !fillCol5()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockB() || !fillRow2() || !fillCol5()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 14:
-                    while (!fillBlockB() || !fillRow2()  || !fillCol6()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockB() || !fillRow2() || !fillCol6()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 15:
-                    while ( !fillBlockB() || !fillRow3() || !fillCol4()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockB() || !fillRow3() || !fillCol4()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 16:
-                    while (!fillBlockB() || !fillRow3() || !fillCol5()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockB() || !fillRow3() || !fillCol5()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 17:
-                    while (!fillBlockB() || !fillRow3() || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockB() || !fillRow3() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 18:
-                    while ( !fillBlockC() || !fillRow1() || !fillCol7()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockC() || !fillRow1() || !fillCol7()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 19:
-                    while ( !fillBlockC() || !fillRow1() || !fillCol8()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockC() || !fillRow1() || !fillCol8()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 20:
-                    while ( !fillBlockC() || !fillRow1()  || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockC() || !fillRow1() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 21:
-                    while (  !fillBlockC() || !fillRow2() || !fillCol7()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockC() || !fillRow2() || !fillCol7()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 22:
-                    while ( !fillBlockC() || !fillRow2()  || !fillCol8()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockC() || !fillRow2() || !fillCol8()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 23:
-                    while (!fillBlockC() || !fillRow2()  || !fillCol9()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockC() || !fillRow2() || !fillCol9()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
+                        tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 24:
-                    while ( !fillBlockC() || !fillRow3() || !fillCol7()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockC() || !fillRow3() || !fillCol7()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 25:
-                    while (!fillBlockC() || !fillRow3() || !fillCol8()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockC() || !fillRow3() || !fillCol8()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 26:
-                    while (!fillBlockC() || !fillRow3() || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockC() || !fillRow3() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 27:
-                    while ( !fillBlockD() || !fillRow4() || !fillCol1()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockD() || !fillRow4() || !fillCol1()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 28:
-                    while ( !fillBlockD() || !fillRow4() || !fillCol2()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockD() || !fillRow4() || !fillCol2()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 29:
-                    while ( !fillBlockD() || !fillRow4()  || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockD() || !fillRow4() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 30:
-                    while ( !fillBlockD() ||  !fillRow5() || !fillCol1()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockD() || !fillRow5() || !fillCol1()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 31:
-                    while ( !fillBlockD() || !fillRow5() || !fillCol2() ){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockD() || !fillRow5() || !fillCol2()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 32:
-                    while (!fillBlockD() || !fillRow5()  || !fillCol3()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockD() || !fillRow5() || !fillCol3()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 33:
-                    while ( !fillBlockD() || !fillRow6() || !fillCol1()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockD() || !fillRow6() || !fillCol1()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 34:
-                    while (!fillBlockD() || !fillRow6() || !fillCol2()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockD() || !fillRow6() || !fillCol2()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 35:
-                    while (!fillBlockD() || !fillRow6() || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockD() || !fillRow6() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 36:
-                    while (!fillBlockE() ||  !fillRow4() || !fillCol4()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockE() || !fillRow4() || !fillCol4()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 37:
-                    while (!fillBlockE() ||  !fillRow4() || !fillCol5()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockE() || !fillRow4() || !fillCol5()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 38:
-                    while (!fillBlockE() || !fillRow4()  || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockE() || !fillRow4() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 39:
-                    while ( !fillBlockE() || !fillRow5() || !fillCol4()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockE() || !fillRow5() || !fillCol4()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 40:
-                    while ( !fillBlockE() || !fillRow5()  || !fillCol5()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockE() || !fillRow5() || !fillCol5()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 41:
-                    while (!fillBlockE() || !fillRow5()  || !fillCol6()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockE() || !fillRow5() || !fillCol6()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 42:
-                    while ( !fillBlockE() || !fillRow6() || !fillCol4()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockE() || !fillRow6() || !fillCol4()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 43:
-                    while (!fillBlockE() || !fillRow6() || !fillCol5()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockE() || !fillRow6() || !fillCol5()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 44:
-                    while (!fillBlockE() || !fillRow6() || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockE() || !fillRow6() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 45:
-                    while ( !fillBlockF() || !fillRow4() || !fillCol7()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockF() || !fillRow4() || !fillCol7()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 46:
-                    while ( !fillBlockF() || !fillRow4() || !fillCol8()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockF() || !fillRow4() || !fillCol8()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 47:
-                    while ( !fillBlockF() || !fillRow4()  || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockF() || !fillRow4() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 48:
-                    while (  !fillBlockF() || !fillRow5() || !fillCol7()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockF() || !fillRow5() || !fillCol7()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 49:
-                    while ( !fillBlockF() || !fillRow5()  || !fillCol8()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockF() || !fillRow5() || !fillCol8()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 50:
-                    while (!fillBlockF() || !fillRow5()  || !fillCol9()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockF() || !fillRow5() || !fillCol9()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
+                        tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 51:
-                    while ( !fillBlockF() || !fillRow6() || !fillCol7()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockF() || !fillRow6() || !fillCol7()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 52:
-                    while (!fillBlockF() || !fillRow6() || !fillCol8()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockF() || !fillRow6() || !fillCol8()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 53:
-                    while (!fillBlockF() || !fillRow6() || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockF() || !fillRow6() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 54:
-                    while ( !fillBlockG() || !fillRow7() || !fillCol1()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockG() || !fillRow7() || !fillCol1()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 55:
-                    while ( !fillBlockG() || !fillRow7() || !fillCol2()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockG() || !fillRow7() || !fillCol2()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 56:
-                    while ( !fillBlockG() || !fillRow7()  || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockG() || !fillRow7() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 57:
-                    while ( !fillBlockG() ||  !fillRow8() || !fillCol1()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockG() || !fillRow8() || !fillCol1()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 58:
-                    while ( !fillBlockG() || !fillRow8() || !fillCol2() ){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockG() || !fillRow8() || !fillCol2()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 59:
-                    while (!fillBlockG() || !fillRow8()  || !fillCol3()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockG() || !fillRow8() || !fillCol3()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 60:
-                    while ( !fillBlockG() || !fillRow9() || !fillCol1()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockG() || !fillRow9() || !fillCol1()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 61:
-                    while (!fillBlockG() || !fillRow9() || !fillCol2()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockG() || !fillRow9() || !fillCol2()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 62:
-                    while (!fillBlockG() || !fillRow9() || !fillCol3()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockG() || !fillRow9() || !fillCol3()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 63:
-                    while (!fillBlockH() ||  !fillRow7() || !fillCol4()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockH() || !fillRow7() || !fillCol4()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 64:
-                    while (!fillBlockH() ||  !fillRow7() || !fillCol5()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockH() || !fillRow7() || !fillCol5()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 65:
-                    while (!fillBlockH() || !fillRow7()  || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockH() || !fillRow7() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 66:
-                    while ( !fillBlockH() || !fillRow8() || !fillCol4()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockH() || !fillRow8() || !fillCol4()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 67:
-                    while ( !fillBlockH() || !fillRow8()  || !fillCol5()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockH() || !fillRow8() || !fillCol5()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 68:
-                    while (!fillBlockH() || !fillRow8()  || !fillCol6()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockH() || !fillRow8() || !fillCol6()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 69:
-                    while ( !fillBlockH() || !fillRow9() || !fillCol4()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockH() || !fillRow9() || !fillCol4()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 70:
-                    while (!fillBlockH() || !fillRow9() || !fillCol5()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockH() || !fillRow9() || !fillCol5()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 71:
-                    while (!fillBlockH() || !fillRow9() || !fillCol6()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockH() || !fillRow9() || !fillCol6()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 72:
-                    while ( !fillBlockI() || !fillRow7() || !fillCol7()){// !fillBlockA() || || !fillCol1()never true
+                    while (!fillBlockI() || !fillRow7() || !fillCol7()) {// !fillBlockA() || || !fillCol1()never true
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 73:
-                    while ( !fillBlockI() || !fillRow7() || !fillCol8()){ //|| !fillBlockA() ||!fillCol2()
+                    while (!fillBlockI() || !fillRow7() || !fillCol8()) { //|| !fillBlockA() ||!fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 74:
-                    while ( !fillBlockI() || !fillRow7()  || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockI() || !fillRow7() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 75:
-                    while (  !fillBlockI() || !fillRow8() || !fillCol7()){ // !fillBlockA()  || || !fillRow2() !fillCol1() ||
+                    while (!fillBlockI() || !fillRow8() || !fillCol7()) { // !fillBlockA()  || || !fillRow2() !fillCol1() ||
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 76:
-                    while ( !fillBlockI() || !fillRow8()  || !fillCol8()){ // !fillBlockA() || !fillRow2() || !fillCol2()
+                    while (!fillBlockI() || !fillRow8() || !fillCol8()) { // !fillBlockA() || !fillRow2() || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 77:
-                    while (!fillBlockI() || !fillRow8()  || !fillCol9()){ //!fillBlockA() || !fillRow2() || !fillCol3()
+                    while (!fillBlockI() || !fillRow8() || !fillCol9()) { //!fillBlockA() || !fillRow2() || !fillCol3()
                         num = r.nextInt(9) + 1;
+                        tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 78:
-                    while ( !fillBlockI() || !fillRow9() || !fillCol7()){ // !fillBlockA() || !fillCol1()
+                    while (!fillBlockI() || !fillRow9() || !fillCol7()) { // !fillBlockA() || !fillCol1()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 79:
-                    while (!fillBlockI() || !fillRow9() || !fillCol8()){ // !fillBlockA() || || !fillCol2()
+                    while (!fillBlockI() || !fillRow9() || !fillCol8()) { // !fillBlockA() || || !fillCol2()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
                 case 80:
-                    while (!fillBlockI() || !fillRow9() || !fillCol9()){ // !fillBlockA() || || !fillCol3()
+                    while (!fillBlockI() || !fillRow9() || !fillCol9()) { // !fillBlockA() || || !fillCol3()
                         num = r.nextInt(9) + 1;
                         tile.setText(Integer.toString(num));
+                        exitLoopCounter++;
+                        if (exitLoopCounter == 20) {
+                            Toast.makeText(MainActivity.this, " Creating Puzzle", Toast.LENGTH_SHORT);
+                            Log.i(TAG, "BREAK: NUM" + num + "; tilePos, " + tilePosList.get(i));
+                            createNewPuzzle();
+                        }
                     }
                     break;
 
             }
-            // make it show every 3rd* and/or 5th* num in the list of positions
-            //TODO: add reset when game hangs/finishes
-            if(r.nextBoolean() && r.nextBoolean()) {
+            // makes it show every 6th* num in the list of positions
+//            if(r.nextBoolean() && r.nextBoolean()) {
+            if (r.nextInt(5) == 0) {
                 tile.setText(Integer.toString(num));
-                tile.setTextColor(Color.BLUE);
-            }else{
+                tile.setTextColor(DEFAULT_COLOR);
+            } else {
                 tile.setText("");
             }
 
-//         while (
-//                 (((defaultTiles.containsKey(a1) && defaultTiles.get(a1) == num) || (defaultTiles.containsKey(a2) && defaultTiles.get(a2) == num) || (defaultTiles.containsKey(a3) && defaultTiles.get(a3) == num) ||
-//                         (defaultTiles.containsKey(a4) && defaultTiles.get(a4) == num) || (defaultTiles.containsKey(a5) && defaultTiles.get(a5) == num) || (defaultTiles.containsKey(a6) && defaultTiles.get(a6) == num) ||
-//                         (defaultTiles.containsKey(a7) &&  defaultTiles.get(a7) == num) || (defaultTiles.containsKey(a8) && defaultTiles.get(a8) == num) || (defaultTiles.containsKey(a9) && defaultTiles.get(a9) == num))
-//                 )
-////                 (((defaultTiles.containsKey(a1) && defaultTiles.get(a1) == num) || (defaultTiles.containsKey(a2) && defaultTiles.get(a2) == num) || (defaultTiles.containsKey(a3) && defaultTiles.get(a3) == num) ||
-////                    (defaultTiles.containsKey(a4) && defaultTiles.get(a4) == num) || (defaultTiles.containsKey(a5) && defaultTiles.get(a5) == num) || (defaultTiles.containsKey(a6) && defaultTiles.get(a6) == num) ||
-////                    (defaultTiles.containsKey(a7) &&  defaultTiles.get(a7) == num) || (defaultTiles.containsKey(a8) && defaultTiles.get(a8) == num) || (defaultTiles.containsKey(a9) && defaultTiles.get(a9) == num))
-////                 )
-//
-////               && (((defaultTiles.containsKey(b1) && defaultTiles.get(b1) == num) || (defaultTiles.containsKey(b2) && defaultTiles.get(b2) == num) || (defaultTiles.containsKey(b3) && defaultTiles.get(b3) == num) ||
-////                        (defaultTiles.containsKey(b4) && defaultTiles.get(b4) == num) || (defaultTiles.containsKey(b5) && defaultTiles.get(b5) == num) || (defaultTiles.containsKey(b6) && defaultTiles.get(b6) == num) ||
-////                        (defaultTiles.containsKey(b7) &&  defaultTiles.get(b7) == num) || (defaultTiles.containsKey(b8) && defaultTiles.get(b8) == num) || (defaultTiles.containsKey(b9) && defaultTiles.get(b9) == num))
-////                  )
-//                 )
-//
-//                {
-//                Log.i(TAG, "checkBlockA: " + checkBlockA() + " POS: " + tilePosList.get(i) + ", " + num);
-//                num = r.nextInt(9) + 1;
-//            }
-
-
-//            while ((aBlockDefaultTiles.containsKey(a1) && aBlockDefaultTiles.get(a1) == num) || (aBlockDefaultTiles.containsKey(a2) && aBlockDefaultTiles.get(a2) == num) || (aBlockDefaultTiles.containsKey(a3) && aBlockDefaultTiles.get(a3) == num) ||
-//                    (aBlockDefaultTiles.containsKey(a4) && aBlockDefaultTiles.get(a4) == num) || (aBlockDefaultTiles.containsKey(a5) && aBlockDefaultTiles.get(a5) == num) || (aBlockDefaultTiles.containsKey(a6) && aBlockDefaultTiles.get(a6) == num) ||
-//                    (aBlockDefaultTiles.containsKey(a7) &&  aBlockDefaultTiles.get(a7) == num) || (aBlockDefaultTiles.containsKey(a8) && aBlockDefaultTiles.get(a8) == num) || (aBlockDefaultTiles.containsKey(a9) && aBlockDefaultTiles.get(a9) == num)) {
-//
-//                Log.i(TAG, "checkBlockA: " + checkBlockA() + " POS: " + tilePosList.get(i) + ", " + num);
-//                num = r.nextInt(9) + 1;
-//            }
-
-//            while ((defaultTiles.containsKey(b1) && defaultTiles.get(b1) == num) || (defaultTiles.containsKey(b2) && defaultTiles.get(b2) == num) || (defaultTiles.containsKey(b3) && defaultTiles.get(b3) == num) ||
-//                    (defaultTiles.containsKey(b4) && defaultTiles.get(b4) == num) || (defaultTiles.containsKey(b5) && defaultTiles.get(b5) == num) || (defaultTiles.containsKey(b6) && defaultTiles.get(b6) == num) ||
-//                    (defaultTiles.containsKey(b7) &&  defaultTiles.get(b7) == num) || (defaultTiles.containsKey(b8) && defaultTiles.get(b8) == num) || (defaultTiles.containsKey(b9) && defaultTiles.get(b9) == num)) {
-//
-//                Log.i(TAG, "checkBlockB: " + checkBlockB() + " POS: " + tilePosList.get(i) + ", " + num);
-//                num = r.nextInt(9) + 1;
-//            }
-
-
-//            tile.setText(Integer.toString(num));
-//            tile.setTextColor(Color.BLUE);
-//            defaultTiles.put(tile, num);
-
         }
-// foreach square check win paths
-        // check if tile alread has a #
-        // interate thur list if tilePos #s
-// goto every sqare and place a # }} " "
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4618,7 +5059,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkWin(){
 
-        Log.i(TAG,"????: " + b1.getText().toString());
         if(!checkBlockA()){
             Toast.makeText(MainActivity.this, "BlockA",Toast.LENGTH_SHORT).show();
             Log.i(TAG,"BA");
@@ -4752,10 +5192,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            fillBoard();
+            createNewPuzzle();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+    
 }
